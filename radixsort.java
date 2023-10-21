@@ -3,7 +3,7 @@ import java.util.Arrays;
 
 public class radixsort {
     public static void main(String args[]){
-        ArrayList<Integer> test =new ArrayList<Integer>(Arrays.asList(9644,6994,9805,8906,954,1968,566,4654,6240,5918,10001,1));
+        ArrayList<Integer> test =new ArrayList<Integer>(Arrays.asList(9644,6994,9805,8906,954,1968,566,4654,6240,5918,10001));
         radixSort(test);
         System.out.println(Arrays.toString(test.toArray()));
     }
