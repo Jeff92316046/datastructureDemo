@@ -14,6 +14,7 @@ public class quicksort {
             int start = s;
             int end = e-1;
             for(;;){
+                
                 for(;;){
                     if(array.get(start)>pivot || start>=e)break;
                     start++;
@@ -25,15 +26,17 @@ public class quicksort {
                 if(start>=end){
                     break;   
                 }
-                
+                System.out.println(start+" "+end);
                 int temp = array.get(start);
                 array.set(start, array.get(end));
                 array.set(end, temp);      
             }   
+            System.out.println(start+" "+end);
             System.out.println(Arrays.toString(array.toArray()));
             int temp = array.get(start);
             array.set(start, pivot);
             array.set(e, temp);
+            System.out.println(Arrays.toString(array.toArray()));
             quickSort(array, s, start-1);
             quickSort(array,start+1 , e);
         }
