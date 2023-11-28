@@ -66,8 +66,9 @@ public class InfixToPrefix {
         System.out.println(array.toString());
         Collections.reverse(array);
         for(String i : array){
+            System.out.println(temp.toString() +" "+ i);
             if(i.equals("+") || i.equals("-") || i.equals("*") || i.equals("/")){
-                System.out.println(temp.toString() +" "+ i);
+                
                 Double num2 = Double.valueOf(temp.pop());
                 Double num1 = Double.valueOf(temp.pop());
                 
