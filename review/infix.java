@@ -20,6 +20,7 @@ public class infix {
                 }
             }
         }
+        System.out.println(str.toString());
         infixtopostfix(str);
         infixtoprefix(str);
     }
