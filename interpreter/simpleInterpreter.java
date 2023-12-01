@@ -52,24 +52,24 @@ public class simpleInterpreter {
                             if(temp2[j].contains("=")){
                                 String temp3[] = temp2[j].split("=");
                                 if(temp3[0].toLowerCase().charAt(0)>='a' && temp3[0].toLowerCase().charAt(0)<='z' && temp3.length==2){ 
+                                    if(!bracketsCheck(temp3[1])){
+                                        System.out.println("line "+(i+1)+" "+errorlist[5]);
+                                        break;
+                                    }
                                     String temp4[] = temp3[1].replaceAll("[()]", "").split("[\\+\\-\\*\\/]");
-                                    System.out.println(Arrays.toString(temp4));
                                     for(int k=0;k<temp4.length;k++){
                                         if(isNum(temp4[k])){
                                             continue;
                                         }else if(isAlphabet(temp4[k])){
-                                            
-                                            if(tokenStore.containsKey(temp4[k])){
-                                               
+                                            if(tokenStore.containsKey(temp4[k])){                                               
                                                 temp3[1] = temp3[1].replace(temp4[k],"("+tokenStore.get(temp4[k])+")");
-                                                
                                             }else{
-                                                System.out.println("line "+i+" "+errorlist[4]);
+                                                System.out.println("line "+(i+1)+" "+errorlist[4]);
                                                 breakFlag = true;
                                                 break;
                                             }
                                         }else{
-                                            System.out.println("line "+i+" "+errorlist[5]);
+                                            System.out.println("line "+(i+1)+" "+errorlist[5]);
                                             breakFlag = true;
                                             break;
                                         }
@@ -77,46 +77,75 @@ public class simpleInterpreter {
                                     if(breakFlag)break;
                                     tokenStore.put(temp3[0], temp3[1]);
                                 }else{
-                                    System.out.println("line "+i+" "+errorlist[3]);
+                                    System.out.println("line "+(i+1)+" "+errorlist[3]);
                                     breakFlag = true;
                                     break;
                                 }
                                 System.out.println(tokenStore.toString());;
                             }else if(temp2[j].contains("infixtoprefix")){
                                 String temp3[] = temp2[j].split(" ");
-                                if(temp3[0].toLowerCase().charAt(0)>='a' && temp3[0].toLowerCase().charAt(0)<='z' && temp3.length==2){ 
+                                System.out.println(temp3[1]);
+                                if(temp3[0].equals("infixtoprefix") && temp3.length==2){
+                                    if(!bracketsCheck(temp3[1])){
+                                        System.out.println("line "+(i+1)+" "+errorlist[5]);
+                                        break;
+                                    }
                                     String temp4[] = temp3[1].replaceAll("[()]", "").split("[\\+\\-\\*\\/]");
-                                    System.out.println(Arrays.toString(temp4));
                                     for(int k=0;k<temp4.length;k++){
                                         if(isNum(temp4[k])){
                                             continue;
                                         }else if(isAlphabet(temp4[k])){
-                                            System.out.println("alpha1");
-                                            if(tokenStore.containsKey(temp4[k])){
-                                                System.out.println("alpha2");
+                                            if(tokenStore.containsKey(temp4[k])){                                               
                                                 temp3[1] = temp3[1].replace(temp4[k],"("+tokenStore.get(temp4[k])+")");
-                                                System.out.println(temp3[1]+" "+temp4[k]+" "+tokenStore.get(temp4[k]));
                                             }else{
-                                                System.out.println("line "+i+" "+errorlist[4]);
+                                                System.out.println("line "+(i+1)+" "+errorlist[4]);
                                                 breakFlag = true;
                                                 break;
                                             }
                                         }else{
-                                            System.out.println("line "+i+" "+errorlist[5]);
+                                            System.out.println("line "+(i+1)+" "+errorlist[5]);
                                             breakFlag = true;
                                             break;
                                         }
                                     }
                                     if(breakFlag)break;
-                                    tokenStore.put(temp3[0], temp3[1]);
                                 }else{
-                                    System.out.println("line "+i+" "+errorlist[3]);
+                                    System.out.println("line "+(i+1)+" "+errorlist[3]);
                                     breakFlag = true;
                                     break;
                                 }
-                                System.out.println(tokenStore.toString());;
                             }else if(temp2[j].contains("infixtopostfix")){
-                                
+                                String temp3[] = temp2[j].split(" ");
+                                System.out.println(temp3[1]);
+                                if(temp3[0].equals("infixtopostfix") && temp3.length==2){
+                                    if(!bracketsCheck(temp3[1])){
+                                        System.out.println("line "+(i+1)+" "+errorlist[5]);
+                                        break;
+                                    }
+                                    String temp4[] = temp3[1].replaceAll("[()]", "").split("[\\+\\-\\*\\/]");
+                                    for(int k=0;k<temp4.length;k++){
+                                        if(isNum(temp4[k])){
+                                            continue;
+                                        }else if(isAlphabet(temp4[k])){
+                                            if(tokenStore.containsKey(temp4[k])){                                               
+                                                temp3[1] = temp3[1].replace(temp4[k],"("+tokenStore.get(temp4[k])+")");
+                                            }else{
+                                                System.out.println("line "+(i+1)+" "+errorlist[4]);
+                                                breakFlag = true;
+                                                break;
+                                            }
+                                        }else{
+                                            System.out.println("line "+(i+1)+" "+errorlist[5]);
+                                            breakFlag = true;
+                                            break;
+                                        }
+                                    }
+                                    if(breakFlag)break;
+                                }else{
+                                    System.out.println("line "+(i+1)+" "+errorlist[3]);
+                                    breakFlag = true;
+                                    break;
+                                }
                             }else if(temp2[j].contains("Print")){
                                 
                             }else if(temp2[j].contains("println")){
@@ -143,8 +172,8 @@ public class simpleInterpreter {
                                     "dump : dump\n"+
                                     "exit : exit\n");
             }else if(splitToken[0].toLowerCase().equals("test")){
-                String test1 = "aavaaba";
-                System.out.println(test1.split("a")[0].equals(""));
+                String test1 = "(10+1-(5)++6)6";
+                System.out.println(arithmeticCheck(test1));
             }else{
                 if(!splitToken[0].toLowerCase().equals("exit")){
                     System.out.println(errorlist[1]);
@@ -159,10 +188,43 @@ public class simpleInterpreter {
         
     }
     public static boolean isNum(String str){
-        return str.matches("[+-]?\\d*(\\.\\d+)?");
+        return str.matches("[0-9]+");
     }
     public static boolean isAlphabet(String str){
-        return str.matches("[a-z]*");
+        return str.matches("[a-z]+");
+    }
+    public static boolean bracketsCheck(String str){
+        int sum=0;
+        boolean flag = true;
+        for(int i=0;i<str.length();i++){
+            if(str.charAt(i) == '('){
+                sum++;
+            }else if(str.charAt(i) == ')'){
+                sum--;
+            }else{
+                continue;
+            }
+            if(sum<0){
+                flag = false;
+                break;
+            }
+        }
+        if(sum!=0)flag = false;
+        return flag;
+    }
+    public static boolean arithmeticCheck(String str){
+        boolean temp1 = true;
+        String temp2[] = str.replaceAll("[()]", "").split("[\\+\\-\\*\\/]");
+        for(int k=0;k<temp2.length;k++){
+            if(isNum(temp2[k])){
+                continue;
+            }else{
+                temp1 = false;
+                break;
+            }
+        }
+        if(!bracketsCheck(str)) temp1=false;
+        return temp1;
     }
     /* public static boolean regex(String str){  
         Pattern pattern1 = Pattern.compile("([a-z])=([0-9]+)");  
