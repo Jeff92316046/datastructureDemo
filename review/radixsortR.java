@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class radixsort {
+public class radixsortR {
     public static void main(String args[]){
         System.out.println(maxDigit(124));
         System.out.println(nowDigit(124,0)+" "+nowDigit(124,1)+" "+nowDigit(124,2));

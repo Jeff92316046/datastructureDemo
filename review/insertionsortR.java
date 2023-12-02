@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class insertionsort {
+public class insertionsortR {
     public static void main(String args[]){
         int test1[] = {1,3,9,4,2,5,7,2};
         ArrayList<Integer> test2 = new ArrayList<>(Arrays.asList(1,3,9,4,2,5,7,2));

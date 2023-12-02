@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class countingsort {
+public class countingsortR {
     public static void main(String args[]){
         ArrayList<Integer> test2 = new ArrayList<>(Arrays.asList(1,1,4,5,4,2,5,2,7,3,4,3,2));
         countingSort(test2);
