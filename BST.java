@@ -15,28 +15,37 @@ public class BST {
     }
     public static void constructBST(node root,int input[]){
         for(int i=0;i<input.length;i++){
+            System.out.print(input[i]+"->");
             for(node temp=root;;){
                 if(i==0){
                     temp.value = input[i];
+                    System.out.print("(root)");
                     break;
                 }
                 if(input[i]<temp.value){
                     if(temp.leftnode==null){
                         temp.leftnode = new node(null, input[i], null);
+                        System.out.print("(R)");
+                        
                         break;
                     }else{
                         temp = temp.leftnode;
+                        System.out.print("R->");
                     }
                 }else if(input[i]>temp.value){
                     if(temp.rightnode==null){
                         temp.rightnode = new node(null, input[i], null);
+                        System.out.print("(L)");
                         break;
                     }else{
                         temp = temp.rightnode;
+                        System.out.print("L->");
                     }
                 }
             }
-            
+            System.out.println("");
+            bfs(root);
+            System.out.println("");
             
         }
     }
