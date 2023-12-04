@@ -234,6 +234,7 @@ public class simpleInterpreter {
                     String temp1[] = fl.fileContent.split("\n"); 
                     for(int i=0;i<temp1.length;i++){
                         String temp2[] = temp1[i].toLowerCase().split(";");
+                        String printTest[] = temp2[0].split(" ");
                         boolean breakFlag = false;
                         for(int j=0;j<temp2.length;j++){
                             if(temp2[j].contains("=")){
@@ -331,7 +332,7 @@ public class simpleInterpreter {
                                     breakFlag = true;
                                     break;
                                 }
-                            }else if(temp2[j].contains("print")){
+                            }else if(printTest[0].equals("print")){
                                 String temp3[] = temp2[j].split(" ");
                                 if(temp3[0].equals("print") && temp3.length==2){
                                     if(temp3[1].toLowerCase().charAt(0)>='a' && temp3[1].toLowerCase().charAt(0)<='z'){
@@ -349,7 +350,7 @@ public class simpleInterpreter {
                                     System.out.println("line "+(i+1)+" "+errorlist[3]);
                                     break;
                                 }
-                            }else if(temp2[j].contains("println")){
+                            }else if(printTest[0].equals("println")){
                                 String temp3[] = temp2[j].split(" ");
                                 if(temp3[0].equals("println") && temp3.length==2 ){
                                     if(temp3[1].toLowerCase().charAt(0)>='a' && temp3[1].toLowerCase().charAt(0)<='z'){
