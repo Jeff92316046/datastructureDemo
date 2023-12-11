@@ -15,15 +15,31 @@ public class BFS {
         output.add(A.name);
         queue.add(A);
         
-        for(;!queue.isEmpty();){    
+        for(;!queue.isEmpty();){  
+            System.out.println("---------");
+            System.out.println("dequeue->"+queue.get(0).name);
+            System.out.print("queue : [");
+            if(!queue.isEmpty()){
+                System.out.print(queue.get(0).name);
+            }
+            for(int j=1;j<queue.size();j++){
+                System.out.print(","+queue.get(j).name);
+            }
+            System.out.println("]");
+            System.out.println("d     : "+d.toString());
+            System.out.println("pi    : "+pi.toString());
+            System.out.println("output:"+output.toString());  
             node temp = queue.get(0);
             queue.remove(0);
             
             for(int i=0;i<temp.adjacentNode.size();i++){
                 if(d.containsKey(temp.adjacentNode.get(i).name))continue;
                 System.out.println("---------");
+                System.out.println("enqueue->"+temp.adjacentNode.get(i).name);
                 System.out.print("queue : [");
-                System.out.print(queue.get(0).name);
+                if(!queue.isEmpty()){
+                    System.out.print(queue.get(0).name);
+                }
                 for(int j=1;j<queue.size();j++){
                     System.out.print(","+queue.get(j).name);
                 }
