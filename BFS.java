@@ -5,8 +5,8 @@ import java.util.Map;
 public class bfs {
     public static void main(String args[]){
         
-        node A = init();
-        ArrayList <node> queue = new ArrayList<>();
+        bfsnode A = init();
+        ArrayList <bfsnode> queue = new ArrayList<>();
         Map <String,String> pi = new HashMap<>();
         Map <String,Integer> d = new HashMap<>();
         ArrayList <String> output = new ArrayList<>();
@@ -29,7 +29,7 @@ public class bfs {
             System.out.println("d     : "+d.toString());
             System.out.println("pi    : "+pi.toString());
             System.out.println("output:"+output.toString());  
-            node temp = queue.get(0);
+            bfsnode temp = queue.get(0);
             queue.remove(0);
             
             for(int i=0;i<temp.adjacentNode.size();i++){
@@ -59,15 +59,15 @@ public class bfs {
         System.out.println("pi    : "+pi.toString());
         System.out.println("output:"+output.toString());
     }
-    public static node init(){
-        node A = new node("A");
-        node B = new node("B");
-        node C = new node("C");
-        node D = new node("D");
-        node E = new node("E");
-        node F = new node("F");
-        node G = new node("G");
-        node H = new node("H");
+    public static bfsnode init(){
+        bfsnode A = new bfsnode("A");
+        bfsnode B = new bfsnode("B");
+        bfsnode C = new bfsnode("C");
+        bfsnode D = new bfsnode("D");
+        bfsnode E = new bfsnode("E");
+        bfsnode F = new bfsnode("F");
+        bfsnode G = new bfsnode("G");
+        bfsnode H = new bfsnode("H");
         A.adjacentNode.add(B);
         A.adjacentNode.add(D);
         A.adjacentNode.add(E);
@@ -91,16 +91,16 @@ public class bfs {
         return A;
     }
 }
-class node{
+class bfsnode{
     String name ;
-    ArrayList <node> adjacentNode;
-    node(){
+    ArrayList <bfsnode> adjacentNode;
+    bfsnode(){
         
     }
-    node(ArrayList <node> adjacentNode){
+    bfsnode(ArrayList <bfsnode> adjacentNode){
         this.adjacentNode = adjacentNode;
     } 
-    node(String name){
+    bfsnode(String name){
         this.name = name;
         adjacentNode = new ArrayList<>();
     }

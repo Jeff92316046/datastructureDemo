@@ -6,8 +6,8 @@ import java.util.Stack;
 public class dfs {
     public static void main(String args[]){
         
-        node A = init();
-        Stack <node> stack = new Stack<>();
+        dfsnode A = init();
+        Stack <dfsnode> stack = new Stack<>();
         Map <String,Integer> d = new HashMap<>();
         Map <String,String> pi = new HashMap<>();
         Map <String,Integer> f = new HashMap<>();
@@ -31,7 +31,7 @@ public class dfs {
             System.out.println("f     : "+f.toString());
             System.out.println("pi    : "+pi.toString());
             System.out.println("output:"+output.toString());  
-            node temp = stack.pop();
+            dfsnode temp = stack.pop();
             visted.put(temp.name,1);
             output.add(temp.name);
             if(!d.containsKey(temp.name)){
@@ -79,15 +79,15 @@ public class dfs {
         System.out.println("pi    : "+pi.toString());
         System.out.println("output:"+output.toString());
     }
-    public static node init(){
-        node A = new node("A");
-        node B = new node("B");
-        node C = new node("C");
-        node D = new node("D");
-        node E = new node("E");
-        node F = new node("F");
-        node G = new node("G");
-        node H = new node("H");
+    public static dfsnode init(){
+        dfsnode A = new dfsnode("A");
+        dfsnode B = new dfsnode("B");
+        dfsnode C = new dfsnode("C");
+        dfsnode D = new dfsnode("D");
+        dfsnode E = new dfsnode("E");
+        dfsnode F = new dfsnode("F");
+        dfsnode G = new dfsnode("G");
+        dfsnode H = new dfsnode("H");
         A.adjacentNode.add(B);
         A.adjacentNode.add(D);
         A.adjacentNode.add(E);
@@ -109,15 +109,15 @@ public class dfs {
     }
 }
 
-class node{
+class dfsnode{
     String name ;
-    ArrayList <node> adjacentNode;
-    node(){
+    ArrayList <dfsnode> adjacentNode;
+    dfsnode(){
     }
-    node(ArrayList <node> adjacentNode){
+    dfsnode(ArrayList <dfsnode> adjacentNode){
         this.adjacentNode = adjacentNode;
     } 
-    node(String name){
+    dfsnode(String name){
         this.name = name;
         adjacentNode = new ArrayList<>();
     }
