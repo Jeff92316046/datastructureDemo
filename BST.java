@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class BST {
+public class bst {
     public static void main(String args[]){
         node root = new node();
         int list[] = {67,28,39,43,77,33,57,89,66,41,54,24};

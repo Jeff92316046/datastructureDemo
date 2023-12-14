@@ -2,16 +2,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BFS {
+public class bfs {
     public static void main(String args[]){
         
         node A = init();
         ArrayList <node> queue = new ArrayList<>();
-        Map <String,String> d = new HashMap<>();
-        Map <String,Integer> pi = new HashMap<>();
+        Map <String,String> pi = new HashMap<>();
+        Map <String,Integer> d = new HashMap<>();
         ArrayList <String> output = new ArrayList<>();
-        d.put(A.name, "null");
-        pi.put(A.name, 0);
+        pi.put(A.name, "null");
+        d.put(A.name, 0);
         output.add(A.name);
         queue.add(A);
         
@@ -48,8 +48,8 @@ public class BFS {
                 System.out.println("pi    : "+pi.toString());
                 System.out.println("output:"+output.toString());
                 queue.add(temp.adjacentNode.get(i));
-                d.put(temp.adjacentNode.get(i).name, temp.name);
-                pi.put(temp.adjacentNode.get(i).name,pi.get(temp.name)+1 );
+                pi.put(temp.adjacentNode.get(i).name, temp.name);
+                d.put(temp.adjacentNode.get(i).name,d.get(temp.name)+1 );
                 output.add(temp.adjacentNode.get(i).name);
             }
         }
@@ -66,9 +66,12 @@ public class BFS {
         node D = new node("D");
         node E = new node("E");
         node F = new node("F");
+        node G = new node("G");
+        node H = new node("H");
         A.adjacentNode.add(B);
         A.adjacentNode.add(D);
         A.adjacentNode.add(E);
+        A.adjacentNode.add(G);
         B.adjacentNode.add(A);
         B.adjacentNode.add(C);
         C.adjacentNode.add(B);
@@ -76,10 +79,15 @@ public class BFS {
         D.adjacentNode.add(A);
         D.adjacentNode.add(E);
         E.adjacentNode.add(A);
-        E.adjacentNode.add(C);
         E.adjacentNode.add(D);
         E.adjacentNode.add(F);
+        E.adjacentNode.add(C);
         F.adjacentNode.add(E);
+        F.adjacentNode.add(G);
+        G.adjacentNode.add(A);
+        G.adjacentNode.add(F);
+        G.adjacentNode.add(H);
+        H.adjacentNode.add(G);
         return A;
     }
 }

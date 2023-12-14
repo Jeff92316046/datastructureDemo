@@ -1,0 +1,6 @@
+test
+0;attribute1;10;type1
+1;attribute2;10;type2
+1;attribute2;10;type2
+2;attribute2;10;type2
+2;attribute2;10;type2
