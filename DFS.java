@@ -34,6 +34,7 @@ public class dfs {
             node temp = stack.pop();
             visted.put(temp.name,1);
             output.add(temp.name);
+<<<<<<< HEAD
             if(!d.containsKey(temp.name)){
                 d.put(temp.name,j);
             }
@@ -43,6 +44,9 @@ public class dfs {
                 f.put(temp.name,j);
             }
 
+=======
+            pi.put(temp.adjacentNode.get(0).name,pi.get(temp.name)+1 );
+>>>>>>> 2beda5afff31ab44827825ee66ffacaab4be3bda
             for(int i=0;i<temp.adjacentNode.size();i++){
                 if (!visted.containsKey(temp.adjacentNode.get(i).name) ){
 
