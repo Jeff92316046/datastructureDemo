@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
-public class DFS {
+public class dfs {
     public static void main(String args[]){
         
         node A = init();
@@ -31,7 +31,7 @@ public class DFS {
             System.out.println("output:"+output.toString());  
             node temp = stack.pop();
             output.add(temp.name);
-            pi.put(temp.adjacentNode.get(i).name,pi.get(temp.name)+1 );
+            pi.put(temp.adjacentNode.get(0).name,pi.get(temp.name)+1 );
             for(int i=0;i<temp.adjacentNode.size();i++){
                 if(d.containsKey(temp.adjacentNode.get(i).name))continue;
                 System.out.println("---------");

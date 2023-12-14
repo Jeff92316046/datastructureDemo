@@ -1,13 +1,15 @@
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class dicisionTree {
-    public static void main(String args[]){
+    public static void main(String args[])throws IOException{
         int identityMode = 0;
         ArrayList <String> treeNameList = new ArrayList<>();
         Map <String,ArrayList<judgeAttribute>> treeAttributeList = new HashMap<>();
@@ -19,11 +21,11 @@ public class dicisionTree {
             if(identityMode == 1){
                 
             }else if(identityMode == 2){
-                int searcher_mode = 0;
+                int editor_mode = 0;
                 for(;;){
-                    System.out.println("input number\n1.new a tree\n2.editor a tree\n3.save a tree\n4.test a tree\n5.back");
-                    searcher_mode = sc.nextInt();
-                    if(searcher_mode == 1){
+                    System.out.println("input number\n1.new a tree\n2.editor a tree\n3.save a tree\n4.test a tree\n5.read tree from file\n6.back");
+                    editor_mode = sc.nextInt();
+                    if(editor_mode == 1){
                         System.out.println(treeNameList.toString());
                         String treeNameTemp;
                         System.out.println("input tree name");
@@ -124,7 +126,7 @@ public class dicisionTree {
                                 break;
                             }
                         }
-                    }else if(searcher_mode == 2){
+                    }else if(editor_mode == 2){
                         if(treeNameList.size()==0){
                             System.out.println("no tree");
                             continue;
@@ -204,16 +206,24 @@ public class dicisionTree {
                                 break;
                             }
                         }
-                    }else if(searcher_mode == 3){
-                        if(treeNameList.size()==0){
-                            System.out.println("no tree");
-                            continue;
-                        }
+                    }else if(editor_mode == 3){
                         for(int i=0;i<treeNameList.size();i++){
                             System.out.println((i+1)+"."+treeNameList.get(i));
                         }
                         int saveTreeTemp = sc.nextInt();
-                        ArrayList <node> queue = new ArrayList<>();
+                        System.out.println("input your file name");
+                        String saveTreeFileNameTemp = sc.next();
+                        FileWriter fw = new FileWriter(saveTreeFileNameTemp);
+                        String tempString = treeNameList.get(saveTreeTemp-1)+"\n";
+                        tempString += "|\n";
+                        for(int i=0;i<treeAttributeList.get(treeNameList.get(saveTreeTemp-1)).size();i++){
+                            tempString += treeAttributeList.get(treeNameList.get(saveTreeTemp-1)).get(i).judgeStr+"\n";
+                        }
+                        tempString += "|\n";
+                        fw.write(tempString + saveTree(treeNodeMap.get(treeNameList.get(saveTreeTemp-1))));
+                        fw.flush();
+                        fw.close();
+                        /* ArrayList <node> queue = new ArrayList<>();
                         queue.add(treeNodeMap.get(treeNameList.get(saveTreeTemp-1)));
                         ArrayList <node> result = new ArrayList<>();
                         for(;!queue.isEmpty();){
@@ -234,10 +244,47 @@ public class dicisionTree {
                         }
                         for(int i=0;i<result.size();i++){
                             System.out.println(result.get(i));
+                        } */
+                    }else if(editor_mode == 4){
+                        String test = "\nabc\nc";
+                        System.out.println(test.split("\n")[1]);
+                        
+                    }else if(editor_mode == 5){
+                        System.out.println("input your file name");
+                        String readTreeFileNameTemp = sc.next();
+                        fileloader fl = new fileloader(readTreeFileNameTemp);
+                        if(fl.existFile()){
+                            Stack <node> st = new Stack<>();
+                            String readTreeFileContent[] =fl.fileContent.split("|");
+                            treeNameList.add(readTreeFileContent[0]);
+                            treeNodeMap.put(readTreeFileContent[0], new node());
+                            
+                            treeAttributeList.put(readTreeFileContent[0], new ArrayList<>());
+                            String readTreeFileContentAttribute[] = readTreeFileContent[1].split("\n"); 
+                            for(int i=0;i<readTreeFileContentAttribute.length;i++){
+                                if(readTreeFileContentAttribute[i].equals("")){
+                                    continue;
+                                }else{
+                                    treeAttributeList.get(readTreeFileContent[0]).add(new judgeAttribute(readTreeFileContentAttribute[i]));
+                                }
+                            }
+                            String readTreeFileContentNode[] =  readTreeFileContent[1].split("\n");
+                            node rootNode = treeNodeMap.get(readTreeFileContent[0]);
+                            for(int i=0;;i++){
+                                if(readTreeFileContentNode[i].equals("")){
+                                    continue;
+                                }else if(readTreeFileContentNode[i].equals("{")){
+
+                                }else if(readTreeFileContentNode[i].equals("}")){
+                                    
+                                }
+                            }
+
+
+                        }else{
+                            System.out.println("file not exist");
                         }
-                    }else if(searcher_mode == 4){
-                        System.out.println(3/2);
-                    }else if(searcher_mode == 5){
+                    }else if(editor_mode == 6){
                         break;
                     }else{
                         System.out.println("input wrong");
@@ -253,6 +300,30 @@ public class dicisionTree {
             }
         }
         
+    }
+    static String saveTree(node nowNode){
+        String temp = "";
+        if(nowNode.judgeNum == null){
+            temp = temp + ";";
+        }else{
+            temp = temp + nowNode.judgeNum +";";
+        }
+        if(nowNode.judger == null){
+            temp = temp +";";
+        }else{
+            temp = temp + nowNode.judger.judgeStr +";";
+        }
+        if(nowNode.endOutput == null){
+            temp = temp + ";\n";
+        }else{
+            temp = temp + nowNode.endOutput +";\n";
+        }
+        
+        if(nowNode.leftNode == null && nowNode.rightNode == null){
+            return "{\n" + temp  +"}\n";
+        }else{
+            return "{\n" + temp + saveTree(nowNode.leftNode) + saveTree(nowNode.rightNode)  +"}\n";
+        }
     }
 }
 class judgeAttribute{

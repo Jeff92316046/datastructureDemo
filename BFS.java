@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BFS {
+public class bfs {
     public static void main(String args[]){
         
         node A = init();
