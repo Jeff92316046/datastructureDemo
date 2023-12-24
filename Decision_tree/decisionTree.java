@@ -3,7 +3,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -106,7 +105,6 @@ public class decisionTree {
                             for(int i=1;i<fileToken.length;i++){
                                 Map <String,Double> testTreeMap = new HashMap<>();
                                 String lineToken[] = fileToken[i].split(" ");
-                                
                                 for(int j=1;j<titleToken.length;j++){
                                     testTreeMap.put(titleToken[j],Double.valueOf(lineToken[j]));
                                 }
